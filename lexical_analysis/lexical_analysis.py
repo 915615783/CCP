@@ -1,4 +1,6 @@
 import NFA
+import DFA
+import lexical_analyzer
 # 注释直接读入的时候忽略掉
 
 # define lexicon 词汇表
@@ -7,7 +9,7 @@ ws = NFA.ws()
 # reserved 保留字 (str)
 reserved = [
 'int', 'char', 'bool', 'true', 'false', '=', ',', 'if', 'else',
-'while', 'for',
+'while', 'for', 'return',
  '<', '<=', '==', '!=', '>', '>=', ';', '+', '+=', '-', '-=',
  '*', '*=', '/', '/=', '++', '--', '{', '}', '(', ')']
 vocab_table = ['ws'] + reserved + ['id', 'int_const', 'char_const']
@@ -18,5 +20,22 @@ others = [NFA.ID(), NFA.intiger(), NFA.charactor()]
 all_pairs = [ws] + reserved + others
 
 nfa = NFA.make_NFA(all_pairs, vocab_table)
+
+dfa = DFA.NFA2DFA(nfa)
+
+
+
+reader = lexical_analyzer.Reader()
+
+reader.set_text_from_file('ccode.c')
+lex_analyzer = lexical_analyzer.Lexical_Analyzer(reader, dfa, vocab_table)
+
+try:
+    while True:
+        print(lex_analyzer.get_token())
+except EOFError:
+    print(lex_analyzer.id_table, lex_analyzer.int_const_table, lex_analyzer.char_const_table)
+    print('EOF')
+
 
 

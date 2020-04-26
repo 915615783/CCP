@@ -2,11 +2,19 @@ import string
 
 class NFANode():
     id_count = 0
+    id2Node = {}
     def __init__(self):
         self.id = NFANode.id_count
         NFANode.id_count += 1
+        NFANode.id2Node[self.id] = self
         self.out = {}   # key: str    value: list of node
         self.accept_vocab = None
+
+    def __str__(self):
+        return str(self.id)
+
+    def __repr__(self):
+        return str(self.id)
 
     def add_out_edge(self, char, target_node):
         if self.out.get(char, None) == None:
@@ -14,6 +22,14 @@ class NFANode():
         else:
             self.out[char].append(target_node)
 
+def get_char_set():
+    '''get all char.(not include epsilon)'''
+    chars = []
+    for i in NFANode.id2Node.values():
+        chars.extend(list(i.out.keys()))
+    chars = set(chars)
+    chars.remove('epsilon')
+    return list(chars)
 
 def union(list_of_pair):
     # list_of_pair [(start_node, end_node), (...)...]
@@ -104,3 +120,4 @@ def make_NFA(list_of_pair, vocab_table):
         list_of_pair[i][1].accept_vocab = vocab_table[i]
         start.add_out_edge('epsilon', list_of_pair[i][0])
     return start
+
