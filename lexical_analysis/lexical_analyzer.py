@@ -1,4 +1,4 @@
-import DFA
+from . import DFA
 
 class Reader():
     def __init__(self, text=None):

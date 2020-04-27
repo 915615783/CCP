@@ -1,4 +1,4 @@
-import NFA
+from . import NFA
 class DFANode():
     id_count = 0
     key2Node = {}

@@ -1,0 +1,24 @@
+program -> program stmt | stmt
+stmt -> var_stmt | func_stmt
+var_stmt -> type var_list ;
+type -> int | bool | char
+var_list -> var_list , var_item | var_item
+var_item -> id | id = expr
+func_stmt -> type id ( param_list_stmt ) { sentences }
+param_list_stmt -> param_list_stmt , param_stmt | param_stmt
+param_stmt -> type id
+sentences -> sentences sentence | sentence | epsilon
+sentence -> single_sentence | compound_sentence
+compound_sentence -> { sentences }
+single_sentence -> var_stmt | assignment | if_branch | for_loop | while_loop | expr_sentence
+assignment -> id = expr ;
+if_branch -> if ( expr ) compound_sentence | if ( expr ) compound_sentence else compound_sentence
+for_loop -> for ( assignment ; expr ; assignment ) sentence
+while_loop -> while ( expr ) sentence
+expr_sentence -> expr ;
+expr -> expr + T | expr - T | T
+T -> T * F | T / F | F
+F-> ( expr ) | id | const | func_call
+const -> int_const | char_const | true | false
+func_call -> id ( param_list_call )
+param_list_call -> param_list_call , expr | expr

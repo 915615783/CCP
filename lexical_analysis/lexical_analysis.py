@@ -1,6 +1,8 @@
-import NFA
-import DFA
-import lexical_analyzer
+from . import NFA
+from . import DFA
+from . import lexical_analyzer
+
+
 # 注释直接读入的时候忽略掉
 
 # define lexicon 词汇表
@@ -27,15 +29,15 @@ dfa = DFA.NFA2DFA(nfa)
 
 reader = lexical_analyzer.Reader()
 
-reader.set_text_from_file('ccode.c')
+reader.set_text_from_file('lexical_analysis/ccode.c')
 lex_analyzer = lexical_analyzer.Lexical_Analyzer(reader, dfa, vocab_table)
 
-try:
-    while True:
-        print(lex_analyzer.get_token())
-except EOFError:
-    print(lex_analyzer.id_table, lex_analyzer.int_const_table, lex_analyzer.char_const_table)
-    print('EOF')
+# try:
+#     while True:
+#         print(lex_analyzer.get_token())
+# except EOFError:
+#     print(lex_analyzer.id_table, lex_analyzer.int_const_table, lex_analyzer.char_const_table)
+#     print('EOF')
 
 
 
