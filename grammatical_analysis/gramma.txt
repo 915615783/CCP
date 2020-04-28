@@ -7,7 +7,7 @@ var_item -> id | id = expr
 func_stmt -> type id ( param_list_stmt ) { sentences }
 param_list_stmt -> param_list_stmt , param_stmt | param_stmt
 param_stmt -> type id
-sentences -> sentences sentence | sentence | epsilon
+sentences -> sentences sentence | sentence
 sentence -> single_sentence | compound_sentence
 compound_sentence -> { sentences }
 single_sentence -> var_stmt | assignment | if_branch | for_loop | while_loop | expr_sentence
