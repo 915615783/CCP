@@ -36,11 +36,7 @@ class Grammatical_Analyzer():
                 except EOFError:
                     token = ('$', None)
             action = self.action.get((stack[-1], token[0]), None)
-            print(token, action, stack)
-            print(C[stack[-1]])
-            # print('  ',  token, sign, action)
             if action == None:
-                print(sign)
                 raise Exception('语法错误，语法分析表没有对应action. token: %s. (line: %d)'%(token, lexical_analyzer.reader.current_line))
             elif action[0] == 's':
                 # 移进

@@ -94,7 +94,7 @@ class Gramma():
                         first_i = self.FIRST(right[index+1:])
                         result.update(first_i - {'epsilon'})
                     right = right[index+1:]
-                if 'epsilon' not in first_i:
+                if ('epsilon' not in first_i) and (len(right)!=0):
                     continue
                     
                 if bnf.left not in self.FOLLOW_stack:
