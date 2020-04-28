@@ -23,4 +23,4 @@ F-> ( expr ) | id | const | func_call
 const -> int_const | char_const | true | false
 func_call -> id ( param_list_call )
 param_list_call -> param_list_call , expr | expr
-return_sentence -> return expr ;
+return_sentence -> return expr ; | return ;

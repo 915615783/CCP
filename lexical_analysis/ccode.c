@@ -14,4 +14,9 @@ int main (){
     return 0;
 }
 
+char fun(int haha, bool bb){
+    printf(haha, bb);
+    return ;
+}
+
 
