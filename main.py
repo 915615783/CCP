@@ -1,5 +1,6 @@
 from lexical_analysis import lexical_analysis, lexical_analyzer
 from grammatical_analysis import gramma, SLR1, grammatical_analyzer
+# ==========  不知道什么情况，文法还是不太支持有epsilon的情况 ==========
 
 # 词法分析
 vocab_table = lexical_analysis.vocab_table
@@ -23,7 +24,7 @@ slr1_analyzer = grammatical_analyzer.Grammatical_Analyzer(action, goto)
 # 进行语法分析
 gramma_tree = slr1_analyzer.analysis(lex_analyzer, slr1.C)
 print(gramma_tree)
-
+gramma_tree.view()
 
 
 

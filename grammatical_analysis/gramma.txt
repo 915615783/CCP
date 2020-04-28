@@ -4,7 +4,7 @@ var_stmt -> type var_list ;
 type -> int | bool | char
 var_list -> var_list , var_item | var_item
 var_item -> id | id = expr
-func_stmt -> type id ( param_list_stmt ) { sentences }
+func_stmt -> type id ( param_list_stmt ) { sentences } | type id ( ) { sentences }
 param_list_stmt -> param_list_stmt , param_stmt | param_stmt
 param_stmt -> type id
 sentences -> sentences sentence | sentence

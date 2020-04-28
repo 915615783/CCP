@@ -1,4 +1,5 @@
 from . import gramma
+from graphviz import Digraph
 class Grammatical_Tree_Node():
     def __init__(self, content):
         '''
@@ -12,10 +13,29 @@ class Grammatical_Tree_Node():
         return len(self.children) == 0
 
     def __str__(self):
+        if isinstance(self.content, tuple):
+            if self.content[1] == None:
+                return str(self.content[0])
         return str(self.content)
 
     def __repr__(self):
+        if isinstance(self.content, tuple):
+            if self.content[1] == None:
+                return str(self.content[0])
         return str(self.content)
+
+    def view(self):
+        dot = Digraph('Grammar Tree')
+        dot.node(str(id(self)), self.__str__())
+        self.recursive_view(dot)
+        dot.view()
+
+    def recursive_view(self, dot):
+        if self.is_leaf() == False:
+            for child in self.children:
+                dot.node(str(id(child)), str(child))
+                dot.edge(str(id(self)), str(id(child)))
+                child.recursive_view(dot)
 
 class Grammatical_Analyzer():
     '''LR Grammatical Analyzer'''
@@ -51,7 +71,8 @@ class Grammatical_Analyzer():
                 if 'epsilon' in right:
                     right.remove('epsilon')
                 reduce_length = len(right)
-                stack = stack[:-reduce_length]
+                if reduce_length != 0:
+                    stack = stack[:-reduce_length]
                 stack.append(self.goto[(stack[-1], left)])
                 reduce_sign = sign[-reduce_length:]
                 sign = sign[:-reduce_length]
