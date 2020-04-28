@@ -8,7 +8,7 @@ int main (int a){
         }
         /* nono*/
     }
-    // return 0;
+    return 0;
 }
 
 

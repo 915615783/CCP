@@ -46,8 +46,6 @@ class Grammatical_Analyzer():
             elif action[0] == 'r':
                 # 归约
                 bnf = id2bnf[int(action[1:])]
-                print(bnf)
-                # print(bnf)
                 left = bnf.left
                 right = list(bnf.right)
                 if 'epsilon' in right:

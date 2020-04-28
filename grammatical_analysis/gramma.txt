@@ -10,7 +10,7 @@ param_stmt -> type id
 sentences -> sentences sentence | sentence
 sentence -> single_sentence | compound_sentence
 compound_sentence -> { sentences }
-single_sentence -> var_stmt | assignment_sentence | if_branch | for_loop | while_loop | expr_sentence
+single_sentence -> var_stmt | assignment_sentence | if_branch | for_loop | while_loop | expr_sentence | return_sentence
 assignment_sentence -> assignment ;
 assignment -> id = expr
 if_branch -> if ( expr ) compound_sentence | if ( expr ) compound_sentence else compound_sentence
@@ -23,3 +23,4 @@ F-> ( expr ) | id | const | func_call
 const -> int_const | char_const | true | false
 func_call -> id ( param_list_call )
 param_list_call -> param_list_call , expr | expr
+return_sentence -> return expr ;
