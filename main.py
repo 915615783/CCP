@@ -26,5 +26,9 @@ gramma_tree = slr1_analyzer.analysis(lex_analyzer, slr1.C)
 print(gramma_tree)
 gramma_tree.view()
 
+# while True:
+#     print(lex_analyzer.get_token())
+
+
 
 

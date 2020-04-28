@@ -2,7 +2,9 @@ from . import DFA
 
 class Reader():
     def __init__(self, text=None):
-        self.text = None
+        if isinstance(text, str):
+            text = text + ' '
+        self.text = text
         self.pointer = 0   # text pointer
         self.current_line = 1
 
@@ -13,7 +15,7 @@ class Reader():
         '''
         :param text: string
         '''
-        self.text = text
+        self.text = text + ' '
         self.pointer = 0
         self.current_line = 1
         
@@ -54,10 +56,11 @@ class Reader():
                 while True:
                     if self.EOF():
                         break
-                    if self.read_next() == '\n':
+                    elif self.text[self.pointer] == '\n':
                         self.move_next()
                         break
                     self.move_next()
+                self.skip_annotation()
             elif self.text[self.pointer: self.pointer+2] == '/*':
                 left_pos = self.current_line
                 self.move_next()
@@ -101,7 +104,6 @@ class Lexical_Analyzer():
                     return self.make_token(accept_vocab, begin_pos, self.reader.pointer)
                 else:
                     raise Exception('词法错误，字符不符合词法. (line:%d)'%self.reader.current_line)
-
         raise EOFError('EOF when getting token. (line%d)'% self.reader.current_line)
 
     def make_token(self, accept_vocab, begin_pos, end_pos):
