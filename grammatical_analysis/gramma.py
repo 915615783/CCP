@@ -1,12 +1,3 @@
-#
-# with open('gramma.txt') as f:
-#     lines = f.readlines()
-#
-# for i in lines:
-#     line = [it.strip() for it in i.strip().split('->')]
-#     for j in line[1].split('|'):
-#         print(line[0], '->', j.strip())
-
 
 class BNF():
     id_count = 0
@@ -49,7 +40,6 @@ class Gramma():
         x: list of str or str
         return a set of vt
         '''
-        # print(x)
         if isinstance(x, str):
             if self.FIRST_cache.get(x, None) != None:
                 return self.FIRST_cache[x]
@@ -96,12 +86,17 @@ class Gramma():
             result.add('$')
         for bnf in self.BNFs:
             if x in bnf.right:
-                index = bnf.right.index(x)
-                if index < len(bnf.right)-1:
-                    first_i = self.FIRST(bnf.right[index+1:])
-                    result.update(first_i - {'epsilon'})
-                    if 'epsilon' not in first_i:
-                        continue
+                right = bnf.right
+                while x in right:    # 这里之前有个bug，一个生成式右部可能同时有几个相同的符号，list.index只能提取出一个。必须把他们都找出来！
+                    index = right.index(x)
+                    first_i = []
+                    if index < len(right)-1:
+                        first_i = self.FIRST(right[index+1:])
+                        result.update(first_i - {'epsilon'})
+                    right = right[index+1:]
+                if 'epsilon' not in first_i:
+                    continue
+                    
                 if bnf.left not in self.FOLLOW_stack:
                     result.update(self.FOLLOW(bnf.left))
         self.FOLLOW_stack.remove(x)

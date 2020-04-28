@@ -10,8 +10,9 @@ param_stmt -> type id
 sentences -> sentences sentence | sentence
 sentence -> single_sentence | compound_sentence
 compound_sentence -> { sentences }
-single_sentence -> var_stmt | assignment | if_branch | for_loop | while_loop | expr_sentence
-assignment -> id = expr ;
+single_sentence -> var_stmt | assignment_sentence | if_branch | for_loop | while_loop | expr_sentence
+assignment_sentence -> assignment ;
+assignment -> id = expr
 if_branch -> if ( expr ) compound_sentence | if ( expr ) compound_sentence else compound_sentence
 for_loop -> for ( assignment ; expr ; assignment ) sentence
 while_loop -> while ( expr ) sentence

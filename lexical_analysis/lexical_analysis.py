@@ -27,10 +27,10 @@ dfa = DFA.NFA2DFA(nfa)
 
 
 
-reader = lexical_analyzer.Reader()
+# reader = lexical_analyzer.Reader()
 
-reader.set_text_from_file('lexical_analysis/ccode.c')
-lex_analyzer = lexical_analyzer.Lexical_Analyzer(reader, dfa, vocab_table)
+# reader.set_text_from_file('lexical_analysis/ccode.c')
+# lex_analyzer = lexical_analyzer.Lexical_Analyzer(reader, dfa, vocab_table)
 
 # try:
 #     while True:
