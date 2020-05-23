@@ -8,6 +8,7 @@ class Grammatical_Tree_Node():
         self.content = content
         self.children = []
         self.parent = None
+        self.current_line = None
     
     def is_leaf(self):
         return len(self.children) == 0
@@ -53,6 +54,7 @@ class Grammatical_Analyzer():
             if token == None:
                 try:
                     token = get_token()
+                    current_line = lexical_analyzer.reader.current_line
                 except EOFError:
                     token = ('$', None)
             action = self.action.get((stack[-1], token[0]), None)
@@ -63,6 +65,7 @@ class Grammatical_Analyzer():
                 # 移进
                 stack.append(int(action[1:]))
                 sign.append(Grammatical_Tree_Node(token))
+                sign[-1].current_line = current_line
                 token = None
             elif action[0] == 'r':
                 # 归约
@@ -86,6 +89,7 @@ class Grammatical_Analyzer():
             
 
     def reduce(self, reduce_sign, bnf):
+        '''归约'''
         parent = Grammatical_Tree_Node(bnf.left)
         parent.children.extend(reduce_sign)
         for sign in reduce_sign:
