@@ -29,7 +29,8 @@
 //     }
 // }
 int main(){
-    if(a){
+    float a = 3;
+    if(!(a >= 1+a) and a==a){
         if(b){
             a = 1;
         }

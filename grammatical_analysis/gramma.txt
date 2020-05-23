@@ -1,7 +1,7 @@
 program -> program stmt | stmt
 stmt -> var_stmt | func_stmt
 var_stmt -> type var_list ;
-type -> int | bool | char
+type -> int | bool | char | float
 var_list -> var_list , var_item | var_item
 var_item -> id | id = expr
 func_stmt -> type id ( param_list_stmt ) { sentences } | type id ( ) { sentences }
@@ -17,10 +17,14 @@ if_branch -> if ( expr ) compound_sentence | if ( expr ) compound_sentence else 
 for_loop -> for ( assignment ; expr ; assignment ) sentence
 while_loop -> while ( expr ) sentence
 expr_sentence -> expr ;
-expr -> expr + T | expr - T | T
-T -> T * F | T / F | F
+expr -> expr or expr_and | expr_and
+expr_and -> expr_and and expr_rel | expr_rel
+expr_rel -> expr_add > expr_add | expr_add >= expr_add | expr_add < expr_add | expr_add <= expr_add | expr_add == expr_add | expr_add != expr_add | expr_add
+expr_add -> expr_add + T | expr_add - T | T
+T -> T * expr_not | T / expr_not | expr_not
+expr_not -> ! F | F
 F-> ( expr ) | id | const | func_call
-const -> int_const | char_const | true | false
+const -> int_const | char_const | float_const | true | false
 func_call -> id ( param_list_call )
 param_list_call -> param_list_call , expr | expr
 return_sentence -> return expr ; | return ;

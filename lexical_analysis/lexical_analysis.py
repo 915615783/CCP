@@ -10,14 +10,14 @@ from . import lexical_analyzer
 ws = NFA.ws()
 # reserved 保留字 (str)
 reserved = [
-'int', 'char', 'bool', 'true', 'false', '=', ',', 'if', 'else',
-'while', 'for', 'return',
+'int', 'char', 'bool', 'float', 'true', 'false', '=', ',', 'if', 'else',
+'while', 'for', 'return', 'or', 'and', '!',
  '<', '<=', '==', '!=', '>', '>=', ';', '+', '+=', '-', '-=',
  '*', '*=', '/', '/=', '++', '--', '{', '}', '(', ')']
-vocab_table = ['ws'] + reserved + ['id', 'int_const', 'char_const']
+vocab_table = ['ws'] + reserved + ['id', 'int_const', 'char_const', 'float_const']
 reserved = [NFA.make_pair_from_string(i) for i in reserved]
 # id或者常量等, pair of NFANode
-others = [NFA.ID(), NFA.intiger(), NFA.charactor()]
+others = [NFA.ID(), NFA.intiger(), NFA.charactor(), NFA.Float()]
 
 all_pairs = [ws] + reserved + others
 

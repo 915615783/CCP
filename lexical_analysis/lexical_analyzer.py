@@ -82,6 +82,7 @@ class Lexical_Analyzer():
         self.id_table = {}   # {str: count}
         self.int_const_table = {}   # {int: count}
         self.char_const_table = {}   # {str: count}
+        self.float_const_table = {}
 
     def add_to_dict(self, item, d):
         if d.get(item, None) == None:
@@ -118,6 +119,11 @@ class Lexical_Analyzer():
             num = int(num)
             self.add_to_dict(num, self.int_const_table)
             return ('int_const', num)
+        elif accept_vocab == 'float_const':
+            num = self.reader.sub_text(begin_pos, end_pos)
+            num = float(num)
+            self.add_to_dict(num, self.float_const_table)
+            return ('float_const', num)   
         elif accept_vocab == 'char_const':
             char = self.reader.sub_text(begin_pos, end_pos)
             char = char[1]  # 'c' -> c

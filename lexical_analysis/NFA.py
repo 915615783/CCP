@@ -97,6 +97,9 @@ def digit_1to9():
 def intiger():
     return union([digit(), link([digit_1to9(), closure(digit())])])
 
+def Float():
+    return link([union([digit(), link([digit_1to9(), closure(digit())])]), make_pair('.'), closure(digit())])
+
 def ID():
     return link([letter_and_(), closure(union([letter_and_(), digit()]))])
 
