@@ -97,6 +97,10 @@ def p13(gram_node, tableptr, offset, three_addr_code):
     if gram_node.children[0].TYPE != gram_node.children[2].TYPE:
         print(gram_node.children[0].TYPE, gram_node.children[2].TYPE)
         raise Exception('运算符两边的类型不同. (line: %d)'%(gram_node.get_current_line()))
+    # 蛮横需求之算术运算只支持int和float
+    if gram_node.children[1].content[0] in ['+', '-', '*', '/']:
+        if gram_node.children[0].TYPE not in ['int', 'float'] or gram_node.children[2].TYPE not in ['int', 'float']:
+            raise Exception('非int或float类型参与算术运算. (line: %d)'%(gram_node.get_current_line()))
     # 然后TYPE从子节点传到父节点
     newTYPE = gram_node.children[0].TYPE
     if gram_node.children[1].content[0] in ['>', '>=', '==', '!=', '<=', '<']:
@@ -138,3 +142,12 @@ def p18(gram_node, tableptr, offset, three_addr_code):
         raise Exception('使用未声明的函数标识符 %s. (line: %d)'%(name, gram_node.get_current_line()))
     assert item.return_type != None
     gram_node.TYPE = item.return_type
+
+def p19(gram_node, tableptr, offset, three_addr_code):
+    '''类型不同不能赋值'''
+    iditem, t = tableptr[-1].lookup(gram_node.children[0].content[1])
+    if iditem.type != gram_node.children[2].TYPE:
+        raise Exception('不同类型不能赋值. (line: %d)'%(gram_node.get_current_line()))
+
+def p20(gram_node, tableptr, offset, three_addr_code):
+    raise Exception('丢失运算符. (line: %d)'%(gram_node.get_current_line()))

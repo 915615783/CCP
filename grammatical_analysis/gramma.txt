@@ -17,7 +17,8 @@ if_branch -> if ( expr ) compound_sentence | if ( expr ) compound_sentence else 
 for_loop -> for ( assignment ; expr ; assignment ) sentence
 while_loop -> while ( expr ) sentence
 expr_sentence -> expr ;
-expr -> expr or expr_and | expr_and
+expr -> expr or expr_and | expr_and | error_expr
+error_expr -> id id | const const | id const | const id
 expr_and -> expr_and and expr_rel | expr_rel
 expr_rel -> expr_add > expr_add | expr_add >= expr_add | expr_add < expr_add | expr_add <= expr_add | expr_add == expr_add | expr_add != expr_add | expr_add
 expr_add -> expr_add + T | expr_add - T | T

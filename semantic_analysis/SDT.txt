@@ -12,12 +12,13 @@ sentence -> single_sentence | compound_sentence
 compound_sentence -> __p9__ { sentences } __p10__
 single_sentence -> var_stmt | assignment_sentence | if_branch | for_loop | while_loop | expr_sentence | return_sentence
 assignment_sentence -> assignment ;
-assignment -> id = expr
+assignment -> id = expr __p19__
 if_branch -> if ( expr ) compound_sentence | if ( expr ) compound_sentence else compound_sentence
 for_loop -> for ( assignment ; expr ; assignment ) sentence
 while_loop -> while ( expr ) sentence
 expr_sentence -> expr ;
-expr -> expr or expr_and __p12__ | expr_and __p11__
+expr -> expr or expr_and __p12__ | expr_and __p11__ | error_expr
+error_expr -> id id __p20__ | const const __p20__ | id const __p20__ | const id __p20__
 expr_and -> expr_and and expr_rel __p12__ | expr_rel __p11__
 expr_rel -> expr_add > expr_add __p13__ | expr_add >= expr_add __p13__ | expr_add < expr_add __p13__ | expr_add <= expr_add __p13__ | expr_add == expr_add __p13__ | expr_add != expr_add __p13__| expr_add __p11__
 expr_add -> expr_add + T __p13__ | expr_add - T __p13__ | T __p11__

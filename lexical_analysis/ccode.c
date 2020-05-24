@@ -28,14 +28,20 @@
 //         1+1;
 //     }
 // }
+bool my(){return;}
 bool mybool;
 char aa, bb, cc, asdfasdf;
 int main(){
     int a = 3, b;
     int iapple, iffff;
+    float myfloat;
     bool mybool, yourbool;
-    if(!(a >= 1+a)){
+    if(a == b){
         if(b){
+            // a = 1.123;
+            // a = myfloat;
+            // myfloat = mybool;
+            mybool = myfloat > myfloat;
             int a;
             a = 1;
         }
@@ -45,4 +51,3 @@ int main(){
     }
 }
 int e;
-int my(){return;}
