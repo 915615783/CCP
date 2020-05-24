@@ -1,4 +1,5 @@
 from semantic_analysis import SDTFunctions
+from semantic_analysis import code_generator
 
 class SDT():
     key2SDT = {}
@@ -50,6 +51,7 @@ class SemanticAnalyzer():
     def __init__(self):
         self.tableptr = []
         self.offset = []
+        self.three_addr_code = code_generator.ThreeAddressCode()
 
     def analysis(self, gram_node):
         '''return the root table'''
@@ -67,7 +69,7 @@ class SemanticAnalyzer():
                 '''遇到翻译方案的函数，要执行它'''
                 func_name = i.split('__')[1]
                 func = SDTFunctions.__dict__[func_name]
-                func(gram_node, self.tableptr, self.offset)
+                func(gram_node, self.tableptr, self.offset, self.three_addr_code)
             else:
                 self.DFS(gram_node.children[index])
                 index += 1

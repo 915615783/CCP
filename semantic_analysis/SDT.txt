@@ -17,14 +17,14 @@ if_branch -> if ( expr ) compound_sentence | if ( expr ) compound_sentence else 
 for_loop -> for ( assignment ; expr ; assignment ) sentence
 while_loop -> while ( expr ) sentence
 expr_sentence -> expr ;
-expr -> expr or expr_and | expr_and
-expr_and -> expr_and and expr_rel | expr_rel
-expr_rel -> expr_add > expr_add | expr_add >= expr_add | expr_add < expr_add | expr_add <= expr_add | expr_add == expr_add | expr_add != expr_add | expr_add
-expr_add -> expr_add + T | expr_add - T | T
-T -> T * expr_not | T / expr_not | expr_not
-expr_not -> ! F | F
-F-> ( expr ) | id | const | func_call
-const -> int_const | char_const | float_const | true | false
-func_call -> id ( param_list_call )
+expr -> expr or expr_and __p12__ | expr_and __p11__
+expr_and -> expr_and and expr_rel __p12__ | expr_rel __p11__
+expr_rel -> expr_add > expr_add __p13__ | expr_add >= expr_add __p13__ | expr_add < expr_add __p13__ | expr_add <= expr_add __p13__ | expr_add == expr_add __p13__ | expr_add != expr_add __p13__| expr_add __p11__
+expr_add -> expr_add + T __p13__ | expr_add - T __p13__ | T __p11__
+T -> T * expr_not __p13__ | T / expr_not __p13__ | expr_not __p11__
+expr_not -> ! F __p14__ | F __p11__
+F-> ( expr ) __p15__ | id __p16__ | const __p11__ | func_call __p11__
+const -> int_const __p17__ | char_const __p17__ | float_const __p17__ | true __p17__ | false __p17__
+func_call -> id __p18__ ( param_list_call )
 param_list_call -> param_list_call , expr | expr
 return_sentence -> return expr ; | return ;

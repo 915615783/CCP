@@ -31,11 +31,12 @@
 bool mybool;
 char aa, bb, cc, asdfasdf;
 int main(){
-    float a = 3;
+    int a = 3, b;
     int iapple, iffff;
     bool mybool, yourbool;
-    if(!(a >= 1+a) and a==a){
+    if(!(a >= 1+a)){
         if(b){
+            int a;
             a = 1;
         }
     }

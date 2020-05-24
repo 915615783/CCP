@@ -36,3 +36,6 @@ sdts = SDTs(r'semantic_analysis\SDT.txt')
 semantic_analyzer = SemanticAnalyzer()
 semantic_analyzer.analysis(gramma_tree).print_all()
 
+# from semantic_analysis.Table import Table
+# t = Table.id2Table.get(3)
+# print(t.lookup('my'))

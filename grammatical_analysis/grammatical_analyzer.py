@@ -9,6 +9,12 @@ class Grammatical_Tree_Node():
         self.children = []
         self.parent = None
         self.current_line = None
+
+    def get_current_line(self):
+        if self.current_line != None:
+            return self.current_line
+        else:
+            return self.children[0].get_current_line()
     
     def is_leaf(self):
         return len(self.children) == 0
