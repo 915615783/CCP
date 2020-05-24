@@ -9,6 +9,7 @@ class Grammatical_Tree_Node():
         self.children = []
         self.parent = None
         self.current_line = None
+        self.ENTRY = None
 
     def get_current_line(self):
         if self.current_line != None:

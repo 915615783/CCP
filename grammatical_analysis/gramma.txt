@@ -24,7 +24,7 @@ expr_rel -> expr_add > expr_add | expr_add >= expr_add | expr_add < expr_add | e
 expr_add -> expr_add + T | expr_add - T | T
 T -> T * expr_not | T / expr_not | expr_not
 expr_not -> ! F | F
-F-> ( expr ) | id | const | func_call
+F -> ( expr ) | id | const | func_call
 const -> int_const | char_const | float_const | true | false
 func_call -> id ( param_list_call )
 param_list_call -> param_list_call , expr | expr

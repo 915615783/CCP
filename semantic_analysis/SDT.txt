@@ -24,7 +24,7 @@ expr_rel -> expr_add > expr_add __p13__ | expr_add >= expr_add __p13__ | expr_ad
 expr_add -> expr_add + T __p13__ | expr_add - T __p13__ | T __p11__
 T -> T * expr_not __p13__ | T / expr_not __p13__ | expr_not __p11__
 expr_not -> ! F __p14__ | F __p11__
-F-> ( expr ) __p15__ | id __p16__ | const __p11__ | func_call __p11__
+F -> ( expr ) __p15__ | id __p16__ | const __p11__ | func_call __p11__
 const -> int_const __p17__ | char_const __p17__ | float_const __p17__ | true __p17__ | false __p17__
 func_call -> id __p18__ ( param_list_call )
 param_list_call -> param_list_call , expr | expr

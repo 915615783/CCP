@@ -81,6 +81,7 @@ def p10(gram_node, tableptr, offset, three_addr_code):
 
 def p11(gram_node, tableptr, offset, three_addr_code):
     gram_node.TYPE = gram_node.children[0].TYPE
+    gram_node.ENTRY = gram_node.children[0].ENTRY
 
 def p12(gram_node, tableptr, offset, three_addr_code):
     # and or 语句
@@ -90,6 +91,13 @@ def p12(gram_node, tableptr, offset, three_addr_code):
     # 然后TYPE从子节点传到父节点
     newTYPE = gram_node.children[0].TYPE
     gram_node.TYPE = newTYPE   # 可能会类型转换，但是这里先不转
+
+    # 生成代码
+    gram_node.ENTRY = three_addr_code.newtemp()
+    E1 = gram_node.children[0]
+    E2 = gram_node.children[2]
+    three_addr_code.outcode(gram_node.ENTRY, ':=', E1.ENTRY, 
+        gram_node.children[1].content[0], E2.ENTRY)
 
 def p13(gram_node, tableptr, offset, three_addr_code):
     # 比较或算术运算语句
@@ -107,6 +115,20 @@ def p13(gram_node, tableptr, offset, three_addr_code):
         newTYPE = 'bool'
     gram_node.TYPE = newTYPE   # 可能会类型转换，但是这里先不转
 
+    # 生成中间代码
+    gram_node.ENTRY = three_addr_code.newtemp()
+    E1 = gram_node.children[0]
+    E2 = gram_node.children[2]
+    op = gram_node.children[1].content[0]
+    if op in ['+', '-', '*', '/']:
+        three_addr_code.outcode(gram_node.ENTRY, ':=', E1.ENTRY, op, E2.ENTRY)
+    elif op in ['>', '>=', '==', '!=', '<=', '<']:
+        three_addr_code.outcode('if', E1.ENTRY, op, E2.ENTRY, 'goto', len(three_addr_code)+4)
+        three_addr_code.outcode(gram_node.ENTRY, ':=', 0)
+        three_addr_code.outcode('goto', len(three_addr_code)+3)
+        three_addr_code.outcode(gram_node.ENTRY, ':=', 1)
+        
+
 def p14(gram_node, tableptr, offset, three_addr_code):
     # not语句
     # 先类型检查，检查子节点的类型是否匹配
@@ -116,8 +138,14 @@ def p14(gram_node, tableptr, offset, three_addr_code):
     newTYPE = gram_node.children[1].TYPE
     gram_node.TYPE = newTYPE   # 可能会类型转换，但是这里先不转
 
+    # 生成代码
+    gram_node.ENTRY = three_addr_code.newtemp()
+    F1 = gram_node.children[1]
+    three_addr_code.outcode(gram_node.ENTRY, ':=', 'not', F1.ENTRY)
+
 def p15(gram_node, tableptr, offset, three_addr_code):
     gram_node.TYPE = gram_node.children[1].TYPE
+    gram_node.ENTRY = gram_node.children[1].ENTRY
 
 def p16(gram_node, tableptr, offset, three_addr_code):
     # 处理变量，获取TYPE并传递到父节点
@@ -127,12 +155,21 @@ def p16(gram_node, tableptr, offset, three_addr_code):
         raise Exception('使用未声明的标识符 %s. (line: %d)'%(name, gram_node.get_current_line()))
     gram_node.TYPE = item.type
 
+    # 生成代码
+    gram_node.ENTRY = (item, itemtable)
+
 def p17(gram_node, tableptr, offset, three_addr_code):
     # 处理常数，获取TYPE并传递到父节点
     token = gram_node.children[0].content
     type_map = {'int_const': 'int', 'char_const':'char', 
         'float_const':'float', 'true':'bool', 'false':'bool'}
     gram_node.TYPE = type_map[token[0]]
+
+    # 生成代码
+    if gram_node.children[0].content[0] in ['true', 'false']:
+        gram_node.ENTRY = gram_node.children[0].content[0]
+    else:
+        gram_node.ENTRY = gram_node.children[0].content[1]
 
 def p18(gram_node, tableptr, offset, three_addr_code):
     # 处理函数调用，获取返回值TYPE并传递到父节点
@@ -146,8 +183,15 @@ def p18(gram_node, tableptr, offset, three_addr_code):
 def p19(gram_node, tableptr, offset, three_addr_code):
     '''类型不同不能赋值'''
     iditem, t = tableptr[-1].lookup(gram_node.children[0].content[1])
+    if iditem == None:
+        raise Exception('给未声明标识符赋值. (line: %d)'%(gram_node.get_current_line()))
     if iditem.type != gram_node.children[2].TYPE:
         raise Exception('不同类型不能赋值. (line: %d)'%(gram_node.get_current_line()))
+
+    # 赋值语句生成代码
+    (p, t) = tableptr[-1].lookup(gram_node.children[0].content[1])
+    expr = gram_node.children[2]
+    three_addr_code.outcode((p, t), ':=', expr.ENTRY)
 
 def p20(gram_node, tableptr, offset, three_addr_code):
     raise Exception('丢失运算符. (line: %d)'%(gram_node.get_current_line()))

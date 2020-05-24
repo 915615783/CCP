@@ -41,9 +41,9 @@ int main(){
             // a = 1.123;
             // a = myfloat;
             // myfloat = mybool;
-            mybool = myfloat > myfloat;
+            mybool = !(a >= b) and false;
             int a;
-            a = 1;
+            a = (b + a) * iapple - a/iffff;
         }
     }
     else{

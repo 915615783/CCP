@@ -42,6 +42,7 @@ gramma_tree = slr1_analyzer.analysis(lex_analyzer, slr1.C)
 sdts = SDTs(r'semantic_analysis\SDT.txt')
 semantic_analyzer = SemanticAnalyzer()
 semantic_analyzer.analysis(gramma_tree).print_all()
+semantic_analyzer.three_addr_code.show()
 
 # from semantic_analysis.Table import Table
 # t = Table.id2Table.get(3)
