@@ -46,7 +46,22 @@ class ThreeAddressCode():
     def outcode(self, *args):
         self.code.append(list(args))
 
+    def merge_single_label(self):
+        '''如果某行只有一个label，指针重定位之后label会被删掉，则那一行会啥都没有'''
+        '''因此需要把只有label的行和下一行合并'''
+        single_labels = []
+        for i in self.code:
+            if len(i) == 1 and '__label' in str(i[0]):
+                single_labels.append(i)
+        for i in single_labels:
+            index = self.code.index(i)
+            if index+1 < len(self.code):
+                self.code[index + 1].extend(i)
+                self.code.pop(index)
+
+
     def show(self):
+        self.merge_single_label()
         self.fill_pointer()
         count = 0
         for line in self.code:
