@@ -15,10 +15,10 @@
 //     }
 //     return 0;
 // }
-// char fun(int haha, bool bb){
-//     printf(haha, bb);
-//     return ;
-// }
+char fun(int haha, bool bb){
+    int iiiiii, jjjjjj;
+    return ;
+}
 // int main(){
 //     // a = (1 + 28)*14;
 //     if(1){
@@ -28,37 +28,38 @@
 //         1+1;
 //     }
 // }
-// bool my(){return;}
-// bool mybool;
-// char aa, bb, cc, asdfasdf;
-// int main(){
-//     int a = 3, b;
-//     int iapple, iffff;
-//     float myfloat;
-//     bool mybool, yourbool;
-//     if(a == b){
-//         if(b){
-//             // a = 1.123;
-//             // a = myfloat;
-//             // myfloat = mybool;
-//             mybool = !(a >= b) and false;
-//             int a;
-//             a = (b + a) * iapple - a/iffff;
-//         }
-//     }
-//     else{
-//         b = 2;
-//     }
-// }
-// int e;
+bool my(){return;}
+bool mybool;
+char aa, bb, cc, asdfasdf;
 int main(){
-    int a, b;
-    if(true){
-        a = 1;
-    }
-    else{
-        if(false){
-            b = 2;
+    int a = 3, b;
+    int iapple, iffff;
+    float myfloat;
+    bool mybool, yourbool;
+    if(a == b and !(a != b)){
+        if(b){
+            // a = 1.123;
+            // a = myfloat;
+            // myfloat = mybool;
+            mybool = !(a >= b) and false;
+            int a;
+            a = (b + a) * iapple - a/iffff;
         }
     }
+    else{
+        b = 2;
+    }
 }
+int e;
+// int main(){
+//     int a, b;
+//     if(true){
+//         a = 1;
+//     }
+//     else{
+//         if(false){
+//             b = 2;
+//             a > b;
+//         }
+//     }
+// }

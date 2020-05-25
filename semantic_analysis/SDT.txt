@@ -6,7 +6,7 @@ var_list -> __p3__ var_list , __p4__ var_item | __p5__ var_item
 var_item -> id __p6__ | id __p6__ = expr
 func_stmt -> type id __p7__ ( param_list_stmt ) { sentences } __p8__ | type id __p7__ ( ) { sentences } __p8__
 param_list_stmt -> param_list_stmt , param_stmt | param_stmt
-param_stmt -> type id
+param_stmt -> type id __p28__
 sentences -> sentences sentence | sentence
 sentence -> single_sentence | compound_sentence
 compound_sentence -> __p9__ { sentences } __p10__

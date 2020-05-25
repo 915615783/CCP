@@ -123,10 +123,13 @@ def p13(gram_node, tableptr, offset, three_addr_code):
     if op in ['+', '-', '*', '/']:
         three_addr_code.outcode(gram_node.ENTRY, ':=', E1.ENTRY, op, E2.ENTRY)
     elif op in ['>', '>=', '==', '!=', '<=', '<']:
-        three_addr_code.outcode('if', E1.ENTRY, op, E2.ENTRY, 'goto', len(three_addr_code)+4)
+        label1, label_pointer1 = three_addr_code.newLabel()
+        label2, label_pointer2 = three_addr_code.newLabel()
+        three_addr_code.outcode('if', E1.ENTRY, op, E2.ENTRY, 'goto', label_pointer1)
         three_addr_code.outcode(gram_node.ENTRY, ':=', 0)
-        three_addr_code.outcode('goto', len(three_addr_code)+3)
-        three_addr_code.outcode(gram_node.ENTRY, ':=', 1)
+        three_addr_code.outcode('goto', label_pointer2)
+        three_addr_code.outcode(gram_node.ENTRY, ':=', 1, label1)
+        three_addr_code.outcode(label2)
         
 
 def p14(gram_node, tableptr, offset, three_addr_code):
@@ -240,3 +243,16 @@ def p27(gram_node, tableptr, offset, three_addr_code):
     begin_label, begin_label_pointer = three_addr_code.newLabel()
     gram_node.BEGINLABELPOINTER = begin_label_pointer
     three_addr_code.outcode(begin_label)
+
+
+
+
+def p28(gram_node, tableptr, offset, three_addr_code):
+    type = gram_node.children[0].children[0].content[0]
+    name = gram_node.children[1].content[1]
+    try:
+        tableptr[-1].enter(name, type, offset[-1])
+    except Exception as e:
+        raise Exception(str(e) + (' (line: %d)' % gram_node.get_current_line()))
+    print(type)
+    offset[-1] += get_width(type)
