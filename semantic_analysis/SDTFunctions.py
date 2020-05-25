@@ -221,3 +221,21 @@ def p23(gram_node, tableptr, offset, three_addr_code):
 def p24(gram_node, tableptr, offset, three_addr_code):
     E_true = gram_node.children[4]
     three_addr_code.outcode(E_true.JUMPLABEL)
+
+
+
+# while
+def p25(gram_node, tableptr, offset, three_addr_code):
+    E = gram_node.children[2]
+    end_label, end_label_pointer = three_addr_code.newLabel()
+    gram_node.ENDLABEL = end_label
+    three_addr_code.outcode('if', E.ENTRY, '==', '0', 'goto', end_label_pointer)
+
+def p26(gram_node, tableptr, offset, three_addr_code):
+    three_addr_code.outcode('goto', gram_node.BEGINLABELPOINTER)
+    three_addr_code.outcode(gram_node.ENDLABEL)
+
+def p27(gram_node, tableptr, offset, three_addr_code):
+    begin_label, begin_label_pointer = three_addr_code.newLabel()
+    gram_node.BEGINLABELPOINTER = begin_label_pointer
+    three_addr_code.outcode(begin_label)

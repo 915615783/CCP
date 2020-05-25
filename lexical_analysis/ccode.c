@@ -53,19 +53,18 @@
 // int e;
 int main(){
     int a, b;
-    // bool c, d;
-    // float i, j;
-    // c = 2 * a + a > b;
-    // i = 0.1111 - 1223.1 + j;
-    if(a == b){
+    bool c, d;
+    float i, j;
+    c = 2 * a + a > b;
+    i = 0.1111 - 1223.1 + j;
+    a = 0;
+    while(a<10){
         a = a+1;
-        if(true){
-            a=1;
+        if (b==0){
+            a = 2;
         }
         else{
-            a=2;
+            while(1 == 0){a=a;}
         }
     }
-    else{
-    b = a + b;}
 }

@@ -15,7 +15,7 @@ assignment_sentence -> assignment ;
 assignment -> id = expr __p19__
 if_branch -> if ( expr ) __p21__ compound_sentence __p22__ | if ( expr ) __p21__ compound_sentence __p23__ else compound_sentence __p24__
 for_loop -> for ( assignment ; expr ; assignment ) sentence
-while_loop -> while ( expr ) sentence
+while_loop -> __p27__ while ( expr ) __p25__ sentence __p26__
 expr_sentence -> expr ;
 expr -> expr or expr_and __p12__ | expr_and __p11__ | error_expr
 error_expr -> id id __p20__ | const const __p20__ | id const __p20__ | const id __p20__
