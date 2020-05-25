@@ -13,7 +13,7 @@ compound_sentence -> __p9__ { sentences } __p10__
 single_sentence -> var_stmt | assignment_sentence | if_branch | for_loop | while_loop | expr_sentence | return_sentence
 assignment_sentence -> assignment ;
 assignment -> id = expr __p19__
-if_branch -> if ( expr ) compound_sentence | if ( expr ) compound_sentence else compound_sentence
+if_branch -> if ( expr ) __p21__ compound_sentence __p22__ | if ( expr ) __p21__ compound_sentence __p23__ else compound_sentence __p24__
 for_loop -> for ( assignment ; expr ; assignment ) sentence
 while_loop -> while ( expr ) sentence
 expr_sentence -> expr ;

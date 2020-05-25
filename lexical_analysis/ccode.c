@@ -28,26 +28,44 @@
 //         1+1;
 //     }
 // }
-bool my(){return;}
-bool mybool;
-char aa, bb, cc, asdfasdf;
+// bool my(){return;}
+// bool mybool;
+// char aa, bb, cc, asdfasdf;
+// int main(){
+//     int a = 3, b;
+//     int iapple, iffff;
+//     float myfloat;
+//     bool mybool, yourbool;
+//     if(a == b){
+//         if(b){
+//             // a = 1.123;
+//             // a = myfloat;
+//             // myfloat = mybool;
+//             mybool = !(a >= b) and false;
+//             int a;
+//             a = (b + a) * iapple - a/iffff;
+//         }
+//     }
+//     else{
+//         b = 2;
+//     }
+// }
+// int e;
 int main(){
-    int a = 3, b;
-    int iapple, iffff;
-    float myfloat;
-    bool mybool, yourbool;
+    int a, b;
+    // bool c, d;
+    // float i, j;
+    // c = 2 * a + a > b;
+    // i = 0.1111 - 1223.1 + j;
     if(a == b){
-        if(b){
-            // a = 1.123;
-            // a = myfloat;
-            // myfloat = mybool;
-            mybool = !(a >= b) and false;
-            int a;
-            a = (b + a) * iapple - a/iffff;
+        a = a+1;
+        if(true){
+            a=1;
+        }
+        else{
+            a=2;
         }
     }
     else{
-        b = 2;
-    }
+    b = a + b;}
 }
-int e;

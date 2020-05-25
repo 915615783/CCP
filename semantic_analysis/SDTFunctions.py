@@ -195,3 +195,29 @@ def p19(gram_node, tableptr, offset, three_addr_code):
 
 def p20(gram_node, tableptr, offset, three_addr_code):
     raise Exception('丢失运算符. (line: %d)'%(gram_node.get_current_line()))
+
+
+
+
+
+# if语句
+def p21(gram_node, tableptr, offset, three_addr_code):
+    E = gram_node.children[2]
+    label, label_pointer = three_addr_code.newLabel()
+    E.JUMPLABEL = label
+    three_addr_code.outcode('if', E.ENTRY, '==', '0', 'goto', label_pointer)
+
+def p22(gram_node, tableptr, offset, three_addr_code):
+    E = gram_node.children[2]
+    three_addr_code.outcode(E.JUMPLABEL)
+
+def p23(gram_node, tableptr, offset, three_addr_code):
+    E = gram_node.children[2]
+    E_true = gram_node.children[4]
+    label, label_pointer = three_addr_code.newLabel()
+    E_true.JUMPLABEL = label
+    three_addr_code.outcode(E.JUMPLABEL, 'goto', label_pointer)
+
+def p24(gram_node, tableptr, offset, three_addr_code):
+    E_true = gram_node.children[4]
+    three_addr_code.outcode(E_true.JUMPLABEL)
