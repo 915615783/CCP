@@ -216,7 +216,8 @@ def p23(gram_node, tableptr, offset, three_addr_code):
     E_true = gram_node.children[4]
     label, label_pointer = three_addr_code.newLabel()
     E_true.JUMPLABEL = label
-    three_addr_code.outcode(E.JUMPLABEL, 'goto', label_pointer)
+    three_addr_code.outcode('goto', label_pointer)
+    three_addr_code.outcode(E.JUMPLABEL)
 
 def p24(gram_node, tableptr, offset, three_addr_code):
     E_true = gram_node.children[4]

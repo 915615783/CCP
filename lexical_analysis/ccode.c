@@ -53,12 +53,12 @@
 // int e;
 int main(){
     int a, b;
-    // bool c, d;
-    // float i, j;
-    // c = 2 * a + a > b;
-    // i = 0.1111 - 1223.1 + j;
-    // a = 0;
-    while(a<10){
-        a = 1 + a;
+    if(true){
+        a = 1;
+    }
+    else{
+        if(false){
+            b = 2;
+        }
     }
 }
