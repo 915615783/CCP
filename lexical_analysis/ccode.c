@@ -1,65 +1,22 @@
-// bool global_var = false;
-
-// int main (){
-//     bool haha;
-//     int i = 0;
-//     for(i=0; i+10; i=i+1){
-//         if(i+10){
-//             printf('a');  // haha
-//             printf('a');
-//         }
-//         else{
-//             a = b;
-//         }
-//         /* nini*/
-//     }
-//     return 0;
-// }
-char fun(int haha, bool bb){
-    int iiiiii, jjjjjj;
-    return ;
-}
-// int main(){
-//     // a = (1 + 28)*14;
-//     if(1){
-//         a + 1;
-//     }
-//     else{
-//         1+1;
-//     }
-// }
-bool my(){return;}
-bool mybool;
-char aa, bb, cc, asdfasdf;
 int main(){
-    int a = 3, b;
-    int iapple, iffff;
-    float myfloat;
-    bool mybool, yourbool;
-    if(a == b and !(a != b)){
-        if(b){
-            // a = 1.123;
-            // a = myfloat;
-            // myfloat = mybool;
-            mybool = !(a >= b) and false;
-            int a;
-            a = (b + a) * iapple - a/iffff;
+    int a, a2, i;
+    float b;
+    bool mybool;
+    a = 10;
+    a2 = 200 + a/10;
+    i = 0;
+    b = 111.123 - 12.0;
+    mybool = false;
+    while(i<10){
+        if(!(a < a2) and b != 10.1){
+            a = (a - a2)*2;
+            i = i + 1;
+        }
+        else{
+            if(mybool == false){
+                mybool = !mybool;
+            }
+            i = i/2;
         }
     }
-    else{
-        b = 2;
-    }
 }
-int e;
-// int main(){
-//     int a, b;
-//     if(true){
-//         a = 1;
-//     }
-//     else{
-//         if(false){
-//             b = 2;
-//             a > b;
-//         }
-//     }
-// }

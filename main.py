@@ -17,6 +17,27 @@ reader = lexical_analyzer.Reader()
 reader.set_text_from_file('lexical_analysis/ccode.c')
 lex_analyzer = lexical_analyzer.Lexical_Analyzer(reader, dfa, vocab_table)
 
+# count_dict = {}
+# try:
+#     while True:
+#         token = lex_analyzer.get_token()
+#         print(token)
+#         if token[0] in count_dict:
+#             count_dict[token[0]] += 1
+#         else:
+#             count_dict[token[0]] = 1
+
+# except Exception:
+#     pass
+
+# print('行数:', lex_analyzer.reader.current_line)
+# print('字符数:', lex_analyzer.reader.text.__len__())
+# print('====== 各类单词出现次数统计表 ======')
+# count_list = list(count_dict.items())
+# count_list.sort(key=lambda x: x[1], reverse=True)
+# for x, y in count_list:
+#     print(x.ljust(14, ' '), y)
+# print('===================================')
 
 
 # 语法分析
@@ -44,3 +65,4 @@ semantic_analyzer = SemanticAnalyzer()
 table = semantic_analyzer.analysis(gramma_tree)
 table.print_all()
 semantic_analyzer.three_addr_code.show()
+semantic_analyzer.three_addr_code.show(True)

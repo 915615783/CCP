@@ -2,6 +2,7 @@ from semantic_analysis.Table import TableItem
 class ThreeAddressCode():
     def __init__(self):
         self.code = []   # list of str(line)
+        self.format_code = []
         self.temp_count = 0
         self.label_count = 0
 
@@ -60,11 +61,12 @@ class ThreeAddressCode():
                 self.code.pop(index)
 
 
-    def show(self):
+    def show(self, four_element_format=False):
         self.merge_single_label()
         self.fill_pointer()
+        self.format()
         count = 0
-        for line in self.code:
+        for num, line in enumerate(self.code):
             count += 1
             out = []
             for i in line:
@@ -72,7 +74,42 @@ class ThreeAddressCode():
                     out.append(str((i[0].name, i[1])))
                 else:
                     out.append(str(i))
-            print(str(count).rjust(3,' ') + '| ' ,' '.join(out))
+            if four_element_format == False:
+                print(str(count).rjust(3,' ') + '| ' ,' '.join(out))
+            else:
+                print(str(count).rjust(3,' ') + '| ' , self.format_code[num])
+
+    def format(self):
+        '''call it after fill pointer'''
+        self.format_code = []
+        for c in self.code:
+            f_c = [None, None, None, None]
+            if ':=' in c:
+                f_c[3] = c[0]
+                if len(c) == 3:
+                    f_c[3] = c[0]
+                    f_c[1] = c[2]
+                    f_c[0] = '='
+                elif 'not' in c:
+                    f_c[0] = c[2]
+                    f_c[1] = c[3]
+                else:
+                    f_c[0] = c[3]
+                    f_c[1] = c[2]
+                    f_c[2] = c[4]
+            elif 'if' in c:
+                f_c[0] = c[2]
+                f_c[1] = c[1]
+                f_c[2] = c[3]
+                f_c[3] = c[5]
+            elif 'goto' in c:
+                f_c[0] = c[0]
+                f_c[3] = c[1] 
+            for i in range(len(f_c)):
+                if isinstance(f_c[i], tuple):
+                    f_c[i] = (f_c[i][0].name, f_c[i][1])
+            self.format_code.append(f_c)
+
 
     def __len__(self):
         return len(self.code)
