@@ -42,7 +42,7 @@ class ThreeAddressCode():
 
     def newtemp(self):
         self.temp_count += 1
-        return 't%d' % (self.temp_count - 1)
+        return 't%d' % ((self.temp_count - 1)% 8)
 
     def outcode(self, *args):
         self.code.append(list(args))
@@ -113,6 +113,11 @@ class ThreeAddressCode():
 
     def __len__(self):
         return len(self.code)
+
+class ObjectCode():
+    def __init__(self):
+        self.code = []
+        
                 
                 
 # a = ThreeAddressCode()
